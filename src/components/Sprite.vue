@@ -74,7 +74,7 @@ const editCell: Function = (): void => {
   />
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .cell {
   position: absolute;
   display: inline-block;

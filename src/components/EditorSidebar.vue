@@ -6,13 +6,13 @@ import { useMapStore } from "../stores/map";
 const MapData = useMapStore();
 const EditorData = useEditorStore();
 
-const selectBrush: Function = (value: SPRITES): void =>
-  EditorData.setCurrentBrush(value);
+const selectBrush: Function = (value: SPRITES): void => EditorData.setCurrentBrush(value);
 const changeRows = (value: Event): void =>
-  MapData.setRows(value?.target?.value || 0);
+  MapData.setRows((value?.target as HTMLInputElement).value || 0);
 const changeColumns = (value: Event) =>
-  MapData.setColumns(value?.target?.value || 0);
+  MapData.setColumns((value?.target as HTMLInputElement).value || 0);
 </script>
+
 
 <template>
   <aside v-if="EditorData.isEditing" class="container">
@@ -20,14 +20,7 @@ const changeColumns = (value: Event) =>
       <h3>Map Size</h3>
       <label class="ranges">
         <span> Rows: </span>
-        <input
-          value="10"
-          type="range"
-          min="1"
-          max="50"
-          step="1"
-          @change="changeRows"
-        />
+        <input value="10" type="range" min="1" max="50" step="1" @change="changeRows" />
       </label>
 
       <label class="ranges">
@@ -46,47 +39,41 @@ const changeColumns = (value: Event) =>
       <h3>Tileset</h3>
       <ul class="tileset">
         <li
+          class="ground"
           :class="{ selected: EditorData.currentBrushTile === SPRITES.GROUND }"
           @click="() => selectBrush(SPRITES.GROUND)"
-        >
-          <img src="images/grass.png" />
-        </li>
+        ></li>
         <li
+          class="key"
           :class="{ selected: EditorData.currentBrushTile === SPRITES.KEY }"
           @click="() => selectBrush(SPRITES.KEY)"
-        >
-          <img src="images/key.png" />
-        </li>
+        ></li>
         <li
+          class="obstacle_1"
           :class="{
             selected: EditorData.currentBrushTile === SPRITES.OBSTACLE_1,
           }"
           @click="() => selectBrush(SPRITES.OBSTACLE_1)"
-        >
-          <img src="images/bush.png" />
-        </li>
+        ></li>
         <li
+          class="obstacle_2"
           :class="{
             selected: EditorData.currentBrushTile === SPRITES.OBSTACLE_2,
           }"
           @click="() => selectBrush(SPRITES.OBSTACLE_2)"
-        >
-          <img src="images/rock.png" />
-        </li>
+        ></li>
         <li
+          class="closed_door"
           :class="{
             selected: EditorData.currentBrushTile === SPRITES.CLOSED_DOOR,
           }"
           @click="() => selectBrush(SPRITES.CLOSED_DOOR)"
-        >
-          <img src="images/closedDoor.png" />
-        </li>
+        ></li>
         <li
+          class="hole"
           :class="{ selected: EditorData.currentBrushTile === SPRITES.HOLE }"
           @click="() => selectBrush(SPRITES.HOLE)"
-        >
-          <img src="images/hole.png" />
-        </li>
+        ></li>
       </ul>
     </div>
   </aside>
@@ -138,6 +125,34 @@ h3 {
     display: inline-block;
     padding: 0;
     margin: 2.5px 5px;
+    width: 64px;
+    height: 64px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &.ground {
+      background-image: url("images/grass.png");
+    }
+    &.key {
+      background-image: url("images/key.png");
+    }
+    &.obstacle_1 {
+      background-image: url("images/bush.png");
+    }
+    &.obstacle_2 {
+      background-image: url("images/rock.png");
+    }
+    &.closed_door {
+      background-image: url("images/closedDoor.png");
+    }
+    &.closed_door {
+      background-image: url("images/closedDoor.png");
+    }
+
+    &.hole {
+      background-image: url("images/hole.png");
+    }
   }
 
   img {

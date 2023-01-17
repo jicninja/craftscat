@@ -8,11 +8,11 @@ import Life from "./Life.vue";
 const PlayerData = usePlayerStore();
 const EditorData = useEditorStore();
 
-const handleMove = ({ keyCode }) => {
-  if (keyCode === 87 || keyCode === 38) PlayerData.move("up");
-  if (keyCode === 65 || keyCode === 37) PlayerData.move("left");
-  if (keyCode === 83 || keyCode === 40) PlayerData.move("down");
-  if (keyCode === 68 || keyCode === 39) PlayerData.move("right");
+const handleMove = ({ key }: KeyboardEvent) => {
+  if (key === "w" || key === "ArrowUp") PlayerData.move("up");
+  if (key === "a" || key === "ArrowLeft") PlayerData.move("left");
+  if (key === "s" || key === "ArrowDown") PlayerData.move("down");
+  if (key === "d" || key === "ArrowRight") PlayerData.move("right");
 };
 
 document.addEventListener("keyup", handleMove);
@@ -26,18 +26,10 @@ onBeforeUnmount(() => {
   <Life />
   <div class="contrainer-controls" v-if="isMobile() && !EditorData.isEditing">
     <div class="wrapper-controls">
-      <button @click="() => PlayerData.move('up')" class="dir-btn up">
-        Up
-      </button>
-      <button @click="() => PlayerData.move('down')" class="dir-btn down">
-        Down
-      </button>
-      <button @click="() => PlayerData.move('left')" class="dir-btn left">
-        Left
-      </button>
-      <button @click="() => PlayerData.move('right')" class="dir-btn right">
-        Right
-      </button>
+      <button @click="() => PlayerData.move('up')" class="dir-btn up">Up</button>
+      <button @click="() => PlayerData.move('down')" class="dir-btn down">Down</button>
+      <button @click="() => PlayerData.move('left')" class="dir-btn left">Left</button>
+      <button @click="() => PlayerData.move('right')" class="dir-btn right">Right</button>
     </div>
   </div>
 </template>

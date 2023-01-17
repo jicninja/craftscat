@@ -11,7 +11,7 @@ const EditorData = useEditorStore();
   >
     <div class="container">
       <div>
-        <img src="images/player.png" />
+        <span class="puss"></span>
         <h1>Hello World!</h1>
       </div>
       <div class="content">
@@ -84,6 +84,19 @@ const EditorData = useEditorStore();
   text-align: justify;
 }
 
+.puss {
+ display: inline-block;
+ width: 32px; 
+ height: 32px;
+ background-image: url('images/player.png');
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: contain;
+ position: relative;
+ top: 5px;
+ left: -5px;
+}
+
 ul {
   padding: 10px;
   color: white;
@@ -105,9 +118,6 @@ h1 {
 
 img {
   width: 32px;
-  position: relative;
-  top: 5px;
-  left: -5px;
 }
 
 button {
